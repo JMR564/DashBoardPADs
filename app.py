@@ -1,4 +1,5 @@
 import base64
+import json
 import os
 import re
 from pathlib import Path
@@ -59,10 +60,25 @@ def supabase_workbook() -> bytes | None:
         with urlopen(storage_request, timeout=30) as response:
             return response.read()
     except HTTPError as exc:
-        if exc.code == 404:
+        error_body = exc.read().decode("utf-8", errors="replace")
+        try:
+            error_data = json.loads(error_body)
+        except json.JSONDecodeError:
+            error_data = {}
+        error_message = str(error_data.get("message", error_body))
+        normalized_message = error_message.lower()
+        if (
+            exc.code in (400, 404)
+            and "bucket" not in normalized_message
+            and (
+                "object not found" in normalized_message
+                or "resource not found" in normalized_message
+            )
+        ):
             return None
         raise RuntimeError(
-            f"Supabase Storage devolvió HTTP {exc.code} al leer el Excel."
+            f"Supabase Storage devolvió HTTP {exc.code} al leer el Excel: "
+            f"{error_message or 'sin detalle'}"
         ) from exc
 
 
