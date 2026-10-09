@@ -166,4 +166,30 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 
 
 
+<script>
+document.addEventListener("change", async (e) => {
+  const input = e.target;
+  if (input.type !== "file" || !input.files.length) return;
+  const f = input.files[0];
+  if (!/\.(xlsx|xlsm|xls)$/i.test(f.name)) return;
+
+  const fd = new FormData();
+  fd.append("file", f);
+  try {
+    const r = await fetch("/upload", {
+      method: "POST",
+      body: fd,
+    });
+    if (r.ok) {
+      alert("Publicado: ahora todos verán estos datos.");
+    } else {
+      const result = await r.json();
+      alert(`No se pudo publicar: ${result.error || "error del servidor"}`);
+    }
+  } catch (err) {
+    alert("Error de conexión al publicar el Excel.");
+  }
+}, true);
+</script>
+
 </body></html>
