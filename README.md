@@ -46,6 +46,14 @@ subirá a Supabase y reemplazará `seguimiento_pad.xlsx`. La siguiente vez que
 cualquier visitante abra o recargue el tablero, recibirá esos datos. No hace
 falta subir una copia en cada navegador ni compartir la clave de Supabase.
 
+Para comprobar la conexión después del despliegue, abre
+`https://TU-SERVICIO.onrender.com/api/status`. Debe responder JSON indicando
+`"storage": "supabase"`, `"configured": true` y, después de subir un archivo,
+`"workbook_exists": true`. Si indica `local` o `configured: false`, confirma
+las variables del servicio en **Render > Environment** y vuelve a desplegar.
+Si devuelve HTTP 502, revisa que la URL, la clave secreta y el bucket sean
+correctos.
+
 **Aviso:** la carga desde el tablero no pide clave ni inicio de sesión, como se
 solicitó. Por tanto, cualquier persona que conozca la URL puede reemplazar el
 Excel compartido. La clave de Supabase permanece en el servidor, pero el

@@ -17,6 +17,10 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
 SUPABASE_SERVICE_ROLE_KEY = os.environ.get("SUPABASE_SERVICE_ROLE_KEY", "")
 SUPABASE_BUCKET = os.environ.get("SUPABASE_BUCKET", "seguimiento-pad")
 SUPABASE_ENABLED = bool(SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY)
+if "RENDER" in os.environ and not SUPABASE_ENABLED:
+    raise RuntimeError(
+        "En Render configura SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY."
+    )
 if (
     bool(SUPABASE_URL) != bool(SUPABASE_SERVICE_ROLE_KEY)
 ):
@@ -151,6 +155,24 @@ def upload():
 @app.get("/health")
 def health() -> Response:
     return Response("ok", content_type="text/plain; charset=utf-8")
+
+
+@app.get("/api/status")
+def storage_status():
+    if not SUPABASE_ENABLED:
+        return jsonify(storage="local", configured=False, workbook_exists=False)
+
+    try:
+        workbook = supabase_workbook()
+    except RuntimeError as exc:
+        return jsonify(storage="supabase", configured=True, error=str(exc)), 502
+
+    return jsonify(
+        storage="supabase",
+        configured=True,
+        bucket=SUPABASE_BUCKET,
+        workbook_exists=workbook is not None,
+    )
 
 
 if __name__ == "__main__":
