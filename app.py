@@ -139,6 +139,22 @@ def dashboard_html() -> bytes:
             b'b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
         ),
         (
+            b'aprobados:ea(e,n=>n.obs==="aprobado")',
+            b'aprobados:ea(e,n=>jB(n.raw["G \xc2\xb7 Aprobado en segunda instancia"])==="aprobado")',
+        ),
+        (
+            b'(!t.obs||n.obs===t.obs)&&(!t.cambios',
+            b'(!t.obs||n.obs===t.obs)&&(!t.aprobacion||jB(n.raw["G \xc2\xb7 Aprobado en segunda instancia"])===t.aprobacion)&&(!t.cambios',
+        ),
+        (
+            b'obs:"",virt:""',
+            b'obs:"",aprobacion:"",virt:""',
+        ),
+        (
+            b'onClick:()=>X({obs:"aprobado"}),on:o.obs==="aprobado"',
+            b'onClick:()=>X({aprobacion:"aprobado"}),on:o.aprobacion==="aprobado"',
+        ),
+        (
             b'function M4({rs:e',
             b'const revisionChartLabels={completa:"REVISADO POR EXPERTO",parcial:"REVISIONES CON COMENTARIO"};function M4({rs:e',
         ),
