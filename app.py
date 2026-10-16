@@ -138,6 +138,26 @@ def dashboard_html() -> bytes:
             b'b.jsx("small",{children:"Observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d. Revisar no equivale a aprobar."})',
             b'b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
         ),
+        (
+            b'function M4({rs:e',
+            b'const revisionChartLabels={completa:"REVISADO POR EXPERTO",parcial:"REVISIONES CON COMENTARIO"};function M4({rs:e',
+        ),
+        (
+            b'formatter:(l,c)=>[l,va[c]??c]',
+            b'formatter:(l,c)=>[l,revisionChartLabels[c]??va[c]??c]',
+        ),
+        (
+            b'name:va[i],value:e.filter',
+            b'name:revisionChartLabels[i]??va[i],value:e.filter',
+        ),
+        (
+            b'va[ne]]},ne))',
+            b'revisionChartLabels[ne]??va[ne]]},ne))',
+        ),
+        (
+            b'va[x]]},x))',
+            b'revisionChartLabels[x]??va[x]]},x))',
+        ),
     )
     for old, new in replacements:
         if html.count(old) != 1:
