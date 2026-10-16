@@ -159,12 +159,44 @@ def dashboard_html() -> bytes:
             b'const revisionChartLabels={completa:"REVISADO POR EXPERTO",parcial:"REVISIONES CON COMENTARIO"};function M4({rs:e',
         ),
         (
+            b'parcial:c.filter(u=>u.revision==="parcial").length',
+            b'parcial:c.filter(u=>String(u.obsRaw??"").trim()!=="").length',
+        ),
+        (
             b'formatter:(l,c)=>[l,va[c]??c]',
             b'formatter:(l,c)=>[l,revisionChartLabels[c]??va[c]??c]',
         ),
         (
             b'name:va[i],value:e.filter',
             b'name:revisionChartLabels[i]??va[i],value:e.filter',
+        ),
+        (
+            b'dataKey:l,stackId:"a",fill:yp[l]',
+            b'dataKey:l,fill:yp[l]',
+        ),
+        (
+            b',l==="sin_registro"&&b.jsx(Hr,{dataKey:"total",position:"right",style:{fontWeight:700,fill:je.ink,fontSize:a?18:13}})]},l))',
+            b']},l))',
+        ),
+        (
+            b'Segmentos por estado de revisi\xc3\xb3n \xc2\xb7 clic para filtrar',
+            b'Conteos por indicador \xc2\xb7 pueden coincidir \xc2\xb7 clic para filtrar',
+        ),
+        (
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"revisiones completas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"revisi\xc3\xb3n parcial"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"aprobaciones expl\xc3\xadcitas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.observaciones}),b.jsx("span",{children:"con observaciones"})]})',
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISADO POR EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:20}),b.jsx("span",{children:"EN REVISION"})]})',
+        ),
+        (
+            b'b.jsx("b",{children:p.completas}),b.jsxs("span",{children:["Revisi\xc3\xb3n completa \xc2\xb7 ",br(p.completas,p.n)," de ",p.n]})',
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISADO POR EXPERTO"})',
+        ),
+        (
+            b'b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"Revisi\xc3\xb3n parcial"}),b.jsx("small",{children:"Valor \xe2\x80\x9cA medias\xe2\x80\x9d."})',
+            b'b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"}),b.jsx("small",{children:"Texto en Cambios a realizar (columna F)."})',
+        ),
+        (
+            b'b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"Aprobaci\xc3\xb3n expl\xc3\xadcita"}),b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
+            b'b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"}),b.jsx("small",{children:"Valor \xe2\x80\x9cAprobado\xe2\x80\x9d en la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
         ),
         (
             b'va[ne]]},ne))',
