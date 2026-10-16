@@ -101,6 +101,60 @@ def save_to_supabase(workbook: bytes, content_type: str) -> None:
 
 def dashboard_html() -> bytes:
     html = HTML_PATH.read_bytes()
+    replacements = (
+        (
+            b'o.g.includes("virtual")||t.push("G1 debe ser la columna de virtualizaci\xc3\xb3n.")',
+            b'o.g.includes("virtual")||o.g.includes("aprob")&&o.g.includes("segunda")||t.push("G1 debe indicar virtualizaci\xc3\xb3n o aprobaci\xc3\xb3n en segunda instancia.")',
+        ),
+        (
+            b'h.virtualizadosReportados=iv(a,`G${m}`)',
+            b'h.virtualizadosReportados=o.g.includes("virtual")?iv(a,`G${m}`):null',
+        ),
+        (
+            b'const T=RB(k);T==="otro"&&r.push(`Fila ${m}: valor de virtualizaci\xc3\xb3n no reconocido (\xe2\x80\x9c${k}\xe2\x80\x9d).`)',
+            b'const T=o.g.includes("virtual")?RB(k):"sin_info";T==="otro"&&r.push(`Fila ${m}: valor de virtualizaci\xc3\xb3n no reconocido (\xe2\x80\x9c${k}\xe2\x80\x9d).`)',
+        ),
+        (
+            b'obs:jB(S),obsRaw:S',
+            b'obs:jB(o.g.includes("aprob")?k:S),obsRaw:S',
+        ),
+        (
+            b'"G \xc2\xb7 Virtualizaci\xc3\xb3n":k',
+            b'[o.g.includes("virtual")?"G \xc2\xb7 Virtualizaci\xc3\xb3n":"G \xc2\xb7 Aprobado en segunda instancia"]:k',
+        ),
+        (
+            b'udec-pad:v1:data',
+            b'udec-pad:v2:data',
+        ),
+        (
+            b'DA={aprobado:"Aprobado (expl\xc3\xadcito)",observacion:"Con observaciones",sin_observacion:"Sin observaci\xc3\xb3n registrada"}',
+            b'DA={aprobado:"Aprobado en segunda instancia",observacion:"En revisi\xc3\xb3n (segunda instancia)",sin_observacion:"Sin estado en segunda instancia"}',
+        ),
+        (
+            b'Aprobaci\xc3\xb3n expl\xc3\xadcita (\xe2\x80\x9cAprobado\xe2\x80\x9d) en ${a.aprobados} PAD. ${a.observaciones} PAD tienen observaciones distintas de \xe2\x80\x9cAprobado\xe2\x80\x9d; el archivo no registra si ya fueron atendidas.',
+            b'Aprobaci\xc3\xb3n en segunda instancia (\xe2\x80\x9cAprobado\xe2\x80\x9d) en ${a.aprobados} PAD. ${a.observaciones} PAD tienen otro valor registrado en esa columna.',
+        ),
+        (
+            b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d`',
+            b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d`',
+        ),
+        (
+            b'label:"EN REVISION",value:20,tone:"alert",def:`${br(B.observaciones,B.n)} de ${B.n} \xc2\xb7 texto distinto de \xe2\x80\x9cAprobado\xe2\x80\x9d`',
+            b'label:"EN REVISION",value:B.observaciones,tone:"alert",def:`${br(B.observaciones,B.n)} de ${B.n} \xc2\xb7 otro valor en columna G`',
+        ),
+        (
+            b'b.jsx("small",{children:"Observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d. Revisar no equivale a aprobar."})',
+            b'b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
+        ),
+    )
+    for old, new in replacements:
+        if html.count(old) != 1:
+            raise RuntimeError(
+                "No se encontró exactamente una referencia del tablero "
+                f"que debía actualizarse: {old.decode('utf-8', errors='replace')}"
+            )
+        html = html.replace(old, new, 1)
+
     if SUPABASE_ENABLED:
         workbook = supabase_workbook()
     elif WORKBOOK_PATH.is_file():
