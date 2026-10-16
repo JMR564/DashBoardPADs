@@ -7,15 +7,23 @@ datos reemplazan los datos iniciales del tablero al abrir o recargar la página.
 ## Preparar el Excel
 
 El tablero espera un Excel compatible con su estructura y la hoja `Control`.
-La columna G debe llamarse **Aprobado en segunda instancia**; sus valores
-alimentan la tarjeta **APROBADO/COMPLETO**. La tarjeta **EN REVISION** conserva
-su valor fijo de 20. En archivos anteriores que aún usan G para virtualización,
-se conserva la lectura anterior.
-La columna F, **Cambios a realizar**, alimenta el texto mostrado en
-**Observación**.
+La columna G debe llamarse **Aprobado en segunda instancia**; los valores
+afirmativos (`Sí`, `Si` o `Aprobado`) alimentan la tarjeta
+**APROBADO/COMPLETO**. La tarjeta **EN REVISION** conserva su valor fijo de 20.
+En archivos anteriores que aún usan G para virtualización, se conserva la
+lectura anterior.
+La tarjeta **REVISIONES CON COMENTARIO** muestra el total de la celda F2,
+debajo del encabezado **Cambios a realizar**. El detalle de registros conserva
+el conteo de comentarios por fila.
 En producción se guarda en el bucket privado de Supabase con la ruta fija
 `seguimiento_pad.xlsx`. El botón **Actualizar desde Excel** reemplaza ese
 archivo; los visitantes verán los datos nuevos al abrir o recargar el tablero.
+Después de una carga exitosa, el tablero confirma la publicación sin recargar
+la página ni ocultar sus controles. Las lecturas de Supabase revalidan el
+archivo para evitar mostrar una copia almacenada en caché.
+Cambiar `data/seguimiento_pad.xlsx` en una copia local del proyecto no modifica
+el Excel compartido de producción; para publicarlo, usa **Actualizar desde
+Excel** en el dashboard.
 
 ## Desplegar gratis en Render con Supabase
 

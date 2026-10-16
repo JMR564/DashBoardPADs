@@ -54,7 +54,8 @@ def supabase_headers(content_type: str | None = None) -> dict[str, str]:
 
 def supabase_workbook() -> bytes | None:
     storage_request = Request(
-        SUPABASE_OBJECT_URL, headers=supabase_headers()
+        SUPABASE_OBJECT_URL,
+        headers=supabase_headers() | {"Cache-Control": "no-cache, no-store"},
     )
     try:
         with urlopen(storage_request, timeout=30) as response:
@@ -139,8 +140,28 @@ def dashboard_html() -> bytes:
             b'b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})',
         ),
         (
+            b'warnings:r,records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null},dateFormat:null}',
+            b'warnings:r,records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,cambiosReportados:null},dateFormat:null}',
+        ),
+        (
+            b'i={records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null},dateFormat:null}',
+            b'i={records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,cambiosReportados:null},dateFormat:null}',
+        ),
+        (
+            b'const h={padsReportados:null,revisadosReportados:null,virtualizadosReportados:null};',
+            b'const h={padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,cambiosReportados:null};',
+        ),
+        (
+            b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.g.includes("virtual")?iv(a,`G${m}`):null;continue',
+            b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.g.includes("virtual")?iv(a,`G${m}`):null,h.cambiosReportados=iv(a,`F${m}`);continue',
+        ),
+        (
+            b'label:"REVISIONES CON COMENTARIO",value:B.cambios,',
+            b'label:"REVISIONES CON COMENTARIO",value:e.headerTotals?.cambiosReportados??B.cambios,',
+        ),
+        (
             b'aprobados:ea(e,n=>n.obs==="aprobado")',
-            b'aprobados:ea(e,n=>jB(n.raw["G \xc2\xb7 Aprobado en segunda instancia"])==="aprobado")',
+            b'aprobados:ea(e,n=>["si","s","yes"].includes(li(n.raw["G \xc2\xb7 Aprobado en segunda instancia"]))||jB(n.raw["G \xc2\xb7 Aprobado en segunda instancia"])==="aprobado")',
         ),
         (
             b'(!t.obs||n.obs===t.obs)&&(!t.cambios',
@@ -160,7 +181,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'parcial:c.filter(u=>u.revision==="parcial").length',
-            b'parcial:c.filter(u=>String(u.obsRaw??"").trim()!=="").length',
+            b'parcial:c.filter(u=>String(u.obsRaw??"").trim()!==""&&jB(u.obsRaw)!=="aprobado").length',
         ),
         (
             b'formatter:(l,c)=>[l,va[c]??c]',
