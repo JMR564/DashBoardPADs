@@ -132,11 +132,11 @@ def dashboard_html() -> bytes:
         ),
         (
             b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d`',
-            b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d`',
+            b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 Cantidad de PADs aprobados en segunda instancia`',
         ),
         (
             b'b.jsx("small",{children:"Observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d. Revisar no equivale a aprobar."})',
-            b'b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
+            b'b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})',
         ),
         (
             b'aprobados:ea(e,n=>n.obs==="aprobado")',
@@ -192,11 +192,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"Revisi\xc3\xb3n parcial"}),b.jsx("small",{children:"Valor \xe2\x80\x9cA medias\xe2\x80\x9d."})',
-            b'b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"}),b.jsx("small",{children:"Texto en Cambios a realizar (columna F)."})',
-        ),
-        (
-            b'b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"Aprobaci\xc3\xb3n expl\xc3\xadcita"}),b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
-            b'b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"}),b.jsx("small",{children:"Valor \xe2\x80\x9cAprobado\xe2\x80\x9d en la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
+            b'b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"}),b.jsx("small",{children:"Cantidad de PADs con comentarios."})',
         ),
         (
             b'va[ne]]},ne))',
@@ -205,6 +201,46 @@ def dashboard_html() -> bytes:
         (
             b'va[x]]},x))',
             b'revisionChartLabels[x]??va[x]]},x))',
+        ),
+        (
+            b'b.jsx("span",{className:"k-def",children:r})',
+            b'b.jsxs("span",{className:"k-def",children:[r&&r.includes("%")?r.split(" de ")[0]:null,r&&r.includes(" \xc2\xb7 ")?b.jsx("small",{style:{marginLeft:"4px"},children:r.split(" \xc2\xb7 ").slice(1).join(" \xc2\xb7 ")}):r&&!r.includes("%")?r:null]})',
+        ),
+        (
+            b'b.jsxs("span",{className:"k-def",children:[br(ne.value,B.n)," de ",B.n]})',
+            b'b.jsxs("span",{className:"k-def",children:[br(ne.value,B.n),b.jsx("small",{style:{marginLeft:"4px"},children:"PAD asignados a este ingeniero"})]})',
+        ),
+        (
+            b'b.jsxs("span",{className:"k-def",children:["Denominador: ",B.n," PAD. Celda vac\xc3\xada = sin informaci\xc3\xb3n, no \xe2\x80\x9cpendiente\xe2\x80\x9d."]})',
+            b'b.jsx("span",{className:"k-def",children:"Estado de virtualizaci\xc3\xb3n en el archivo"})',
+        ),
+        (
+            b'def:G?`de ${_.length} en el archivo`:`${B.programas} programas \xc2\xb7 ${B.facultades} facultades`',
+            b'def:"Cantidad total de PADs registrados"',
+        ),
+        (
+            b'valor \xe2\x80\x9cS\xc3\xad\xe2\x80\x9d en revisi\xc3\xb3n',
+            b'Cantidad de PADs revisados por experto',
+        ),
+        (
+            b'con texto en Cambios a realizar',
+            b'Cantidad de PADs con comentarios',
+        ),
+        (
+            b'celda de revisi\xc3\xb3n vac\xc3\xada',
+            b'Cantidad de PADs sin revisi\xc3\xb3n',
+        ),
+        (
+            b'texto distinto de \xe2\x80\x9cAprobado\xe2\x80\x9d',
+            b'Cantidad de PADs en revisi\xc3\xb3n',
+        ),
+        (
+            b'PAD asignados a este ingeniero',
+            b'Cantidad de PADs asignados a este ingeniero',
+        ),
+        (
+            b'Estado de virtualizaci\xc3\xb3n en el archivo',
+            b'Cantidad de PADs seg\xc3\xban su estado de virtualizaci\xc3\xb3n',
         ),
     )
     for old, new in replacements:
