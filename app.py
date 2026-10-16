@@ -245,7 +245,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'con texto en Cambios a realizar',
-            b'Cantidad de PADs con comentarios',
+            b'Cantidad de PADs con comentarios por actualizar',
         ),
         (
             b'celda de revisi\xc3\xb3n vac\xc3\xada',
