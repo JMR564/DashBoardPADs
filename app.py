@@ -115,10 +115,6 @@ def dashboard_html() -> bytes:
             b'const T=o.g.includes("virtual")?RB(k):"sin_info";T==="otro"&&r.push(`Fila ${m}: valor de virtualizaci\xc3\xb3n no reconocido (\xe2\x80\x9c${k}\xe2\x80\x9d).`)',
         ),
         (
-            b'obs:jB(S),obsRaw:S',
-            b'obs:jB(o.g.includes("aprob")?k:S),obsRaw:S',
-        ),
-        (
             b'"G \xc2\xb7 Virtualizaci\xc3\xb3n":k',
             b'[o.g.includes("virtual")?"G \xc2\xb7 Virtualizaci\xc3\xb3n":"G \xc2\xb7 Aprobado en segunda instancia"]:k',
         ),
