@@ -177,7 +177,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'function M4({rs:e',
-            b'const revisionChartLabels={completa:"REVISADO POR EXPERTO",parcial:"APROBADO/COMPLETO"};function M4({rs:e',
+            b'const revisionChartLabels={completa:"REVISION EXPERTO",parcial:"APROBADO/COMPLETO"};function M4({rs:e',
         ),
         (
             b'parcial:c.filter(u=>u.revision==="parcial").length',
@@ -205,7 +205,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"revisiones completas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"revisi\xc3\xb3n parcial"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"aprobaciones expl\xc3\xadcitas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.observaciones}),b.jsx("span",{children:"con observaciones"})]})',
-            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISADO POR EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:20}),b.jsx("span",{children:"EN REVISION"})]})',
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISION EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:20}),b.jsx("span",{children:"EN REVISION"})]})',
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsxs("span",{children:["Revisi\xc3\xb3n completa \xc2\xb7 ",br(p.completas,p.n)," de ",p.n]})',
