@@ -177,11 +177,11 @@ def dashboard_html() -> bytes:
         ),
         (
             b'function M4({rs:e',
-            b'const revisionChartLabels={completa:"REVISADO POR EXPERTO",parcial:"REVISIONES CON COMENTARIO"};function M4({rs:e',
+            b'const revisionChartLabels={completa:"REVISADO POR EXPERTO",parcial:"APROBADO/COMPLETO"};function M4({rs:e',
         ),
         (
             b'parcial:c.filter(u=>u.revision==="parcial").length',
-            b'parcial:c.filter(u=>String(u.obsRaw??"").trim()!==""&&jB(u.obsRaw)!=="aprobado").length',
+            b'parcial:c.filter(u=>["si","s","yes"].includes(li(u.raw["G \xc2\xb7 Aprobado en segunda instancia"]))||jB(u.raw["G \xc2\xb7 Aprobado en segunda instancia"])==="aprobado").length',
         ),
         (
             b'formatter:(l,c)=>[l,va[c]??c]',
