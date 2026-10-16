@@ -139,10 +139,6 @@ def dashboard_html() -> bytes:
             b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d`',
         ),
         (
-            b'label:"EN REVISION",value:20,tone:"alert",def:`${br(B.observaciones,B.n)} de ${B.n} \xc2\xb7 texto distinto de \xe2\x80\x9cAprobado\xe2\x80\x9d`',
-            b'label:"EN REVISION",value:B.observaciones,tone:"alert",def:`${br(B.observaciones,B.n)} de ${B.n} \xc2\xb7 otro valor en columna G`',
-        ),
-        (
             b'b.jsx("small",{children:"Observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d. Revisar no equivale a aprobar."})',
             b'b.jsx("small",{children:"Valor de la columna G \xe2\x80\x9cAprobado en segunda instancia\xe2\x80\x9d."})',
         ),

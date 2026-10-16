@@ -7,9 +7,10 @@ datos reemplazan los datos iniciales del tablero al abrir o recargar la página.
 ## Preparar el Excel
 
 El tablero espera un Excel compatible con su estructura y la hoja `Control`.
-La columna G debe llamarse **Aprobado en segunda instancia**; las tarjetas
-**APROBADO/COMPLETO** y **EN REVISION** se calculan con sus valores. En archivos
-anteriores que aún usan G para virtualización, se conserva la lectura anterior.
+La columna G debe llamarse **Aprobado en segunda instancia**; sus valores
+alimentan la tarjeta **APROBADO/COMPLETO**. La tarjeta **EN REVISION** conserva
+su valor fijo de 20. En archivos anteriores que aún usan G para virtualización,
+se conserva la lectura anterior.
 En producción se guarda en el bucket privado de Supabase con la ruta fija
 `seguimiento_pad.xlsx`. El botón **Actualizar desde Excel** reemplaza ese
 archivo; los visitantes verán los datos nuevos al abrir o recargar el tablero.
