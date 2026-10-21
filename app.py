@@ -209,7 +209,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsxs("span",{children:["Revisi\xc3\xb3n completa \xc2\xb7 ",br(p.completas,p.n)," de ",p.n]})',
-            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISADO POR EXPERTO"})',
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISION EXPERTO"})',
         ),
         (
             b'b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"Revisi\xc3\xb3n parcial"}),b.jsx("small",{children:"Valor \xe2\x80\x9cA medias\xe2\x80\x9d."})',
@@ -252,8 +252,12 @@ def dashboard_html() -> bytes:
             b'Cantidad de PADs sin revisi\xc3\xb3n',
         ),
         (
+            b'value:20,tone:"alert",def:',
+            b'value:10,tone:"alert",def:',
+        ),
+        (
             b'texto distinto de \xe2\x80\x9cAprobado\xe2\x80\x9d',
-            b'Cantidad de PADs en revisi\xc3\xb3n',
+            b'Cantidad diaria de PADs en revisi\xc3\xb3n',
         ),
         (
             b'PAD asignados a este ingeniero',
