@@ -108,16 +108,36 @@ def dashboard_html() -> bytes:
             b'o.g.includes("virtual")||o.g.includes("aprob")&&o.g.includes("segunda")||t.push("G1 debe indicar virtualizaci\xc3\xb3n o aprobaci\xc3\xb3n en segunda instancia.")',
         ),
         (
+            b'g:li(Vr(a,"G1"))};if((!o.b||!o.c)',
+            b'g:li(Vr(a,"G1")),virtualColumn:li(Vr(a,"I1")).includes("virtual")?"I":li(Vr(a,"H1")).includes("virtual")?"H":li(Vr(a,"G1")).includes("virtual")?"G":null};if((!o.b||!o.c)',
+        ),
+        (
+            b'o.g.includes("virtual")||o.g.includes("aprob")&&o.g.includes("segunda")||t.push("G1 debe indicar virtualizaci\xc3\xb3n o aprobaci\xc3\xb3n en segunda instancia.")',
+            b'o.g.includes("virtual")||o.g.includes("aprob")&&o.g.includes("segunda")||t.push("G1 debe indicar virtualizaci\xc3\xb3n o aprobaci\xc3\xb3n en segunda instancia."),o.virtualColumn||t.push("La hoja Control debe incluir Virtualizacion en I1, H1 o G1 (formato anterior).")',
+        ),
+        (
             b'h.virtualizadosReportados=iv(a,`G${m}`)',
-            b'h.virtualizadosReportados=o.g.includes("virtual")?iv(a,`G${m}`):null',
+            b'h.virtualizadosReportados=o.virtualColumn?iv(a,`${o.virtualColumn}${m}`):null',
         ),
         (
             b'const T=RB(k);T==="otro"&&r.push(`Fila ${m}: valor de virtualizaci\xc3\xb3n no reconocido (\xe2\x80\x9c${k}\xe2\x80\x9d).`)',
-            b'const T=o.g.includes("virtual")?RB(k):"sin_info";T==="otro"&&r.push(`Fila ${m}: valor de virtualizaci\xc3\xb3n no reconocido (\xe2\x80\x9c${k}\xe2\x80\x9d).`)',
+            b'const T=o.virtualColumn?RB(v):"sin_info";T==="otro"&&r.push(`Fila ${m}: valor de virtualizaci\xc3\xb3n no reconocido (\xe2\x80\x9c${v}\xe2\x80\x9d).`)',
         ),
         (
             b'"G \xc2\xb7 Virtualizaci\xc3\xb3n":k',
-            b'[o.g.includes("virtual")?"G \xc2\xb7 Virtualizaci\xc3\xb3n":"G \xc2\xb7 Aprobado en segunda instancia"]:k',
+            b'[`${o.virtualColumn} \xc2\xb7 Virtualizaci\xc3\xb3n`]:v',
+        ),
+        (
+            b'const w=a[`D${m}`],E=Vr(a,`E${m}`),S=Vr(a,`F${m}`),k=Vr(a,`G${m}`);',
+            b'const w=a[`D${m}`],E=Vr(a,`E${m}`),S=Vr(a,`F${m}`),k=Vr(a,`G${m}`),v=o.virtualColumn?Vr(a,`${o.virtualColumn}${m}`):null;',
+        ),
+        (
+            b'if(!y&&!g&&!A&&!E&&!S&&!k&&!(w&&w.v!=null))continue',
+            b'if(!y&&!g&&!A&&!E&&!S&&!k&&!v&&!(w&&w.v!=null))continue',
+        ),
+        (
+            b'virtRaw:k',
+            b'virtRaw:v',
         ),
         (
             b'udec-pad:v1:data',
@@ -133,7 +153,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d`',
-            b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 Cantidad de PADs aprobados en segunda instancia`',
+            b'label:"APROBADO/COMPLETO",value:e.headerTotals?.aprobadosReportados??B.aprobados,tone:"ok",def:`${br(e.headerTotals?.aprobadosReportados??B.aprobados,B.n)} de ${B.n} \xc2\xb7 Cantidad de PADs aprobados en segunda instancia`',
         ),
         (
             b'b.jsx("small",{children:"Observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d. Revisar no equivale a aprobar."})',
@@ -141,19 +161,23 @@ def dashboard_html() -> bytes:
         ),
         (
             b'warnings:r,records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null},dateFormat:null}',
-            b'warnings:r,records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,cambiosReportados:null},dateFormat:null}',
+            b'warnings:r,records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,aprobadosReportados:null,cambiosReportados:null},dateFormat:null}',
         ),
         (
             b'i={records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null},dateFormat:null}',
-            b'i={records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,cambiosReportados:null},dateFormat:null}',
+            b'i={records:[],engineers:[],headerTotals:{padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,aprobadosReportados:null,cambiosReportados:null},dateFormat:null}',
         ),
         (
             b'const h={padsReportados:null,revisadosReportados:null,virtualizadosReportados:null};',
-            b'const h={padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,cambiosReportados:null};',
+            b'const h={padsReportados:null,revisadosReportados:null,virtualizadosReportados:null,aprobadosReportados:null,cambiosReportados:null};',
         ),
         (
-            b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.g.includes("virtual")?iv(a,`G${m}`):null;continue',
-            b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.g.includes("virtual")?iv(a,`G${m}`):null,h.cambiosReportados=iv(a,`F${m}`);continue',
+            b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.virtualColumn?iv(a,`${o.virtualColumn}${m}`):null;continue',
+            b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.virtualColumn?iv(a,`${o.virtualColumn}${m}`):null,h.aprobadosReportados=iv(a,`G${m}`),h.cambiosReportados=iv(a,`F${m}`);continue',
+        ),
+        (
+            b'children:B.virtConf}),b.jsx("span",{className:"k-def",children:"confirmadas"})',
+            b'children:ce.virtualizadosReportados??B.virtConf}),b.jsx("span",{className:"k-def",children:"subidos"})',
         ),
         (
             b'label:"REVISIONES CON COMENTARIO",value:B.cambios,',

@@ -7,11 +7,16 @@ datos reemplazan los datos iniciales del tablero al abrir o recargar la página.
 ## Preparar el Excel
 
 El tablero espera un Excel compatible con su estructura y la hoja `Control`.
-La columna G debe llamarse **Aprobado en segunda instancia**; los valores
-afirmativos (`Sí`, `Si` o `Aprobado`) alimentan la tarjeta
-**APROBADO/COMPLETO**. La tarjeta **EN REVISION** conserva su valor fijo de 20.
-En archivos anteriores que aún usan G para virtualización, se conserva la
-lectura anterior.
+La columna G puede llamarse **Aprobado en segunda instancia**; sus valores
+alimentan la columna de aprobación de los detalles. La tarjeta
+**APROBADO/COMPLETO** muestra el total de `G2`; si está vacío, cuenta los PAD
+con valor afirmativo (`Sí`, `Si` o `Aprobado`) en G. La tarjeta
+**EN REVISION** conserva su valor fijo de 20.
+La virtualización se toma de la columna cuyo encabezado `Virtualizacion` esté
+en I1 (preferida), H1 o, en archivos anteriores, G1. La tarjeta
+**VIRTUALIZACIÓN** muestra el total informado en la fila 2 de esa columna
+(I2 cuando se usa I); la columna Virtualización de la tabla muestra el valor
+de cada PAD en la misma columna.
 La tarjeta **REVISIONES CON COMENTARIO** muestra el total de la celda F2,
 debajo del encabezado **Cambios a realizar**. El detalle de registros conserva
 el conteo de comentarios por fila.
