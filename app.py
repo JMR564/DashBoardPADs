@@ -245,11 +245,23 @@ def dashboard_html() -> bytes:
         ),
         (
             b'["Revisiones completas",o.completas],["Parciales",o.parciales],["Sin revisi\xc3\xb3n",o.sinRevision],["Aprobados",o.aprobados],["Con observaciones",o.observaciones],["Virtualizaci\xc3\xb3n confirmada",o.virtConf]',
-            b'["REVISION EXPERTO",o.completas],["REVISIONES CON COMENTARIO",r.headerTotals?.cambiosReportados??o.cambios],["Sin revisi\xc3\xb3n registrada",o.sinRevision],["APROBADO/COMPLETO",r.headerTotals?.aprobadosReportados??o.aprobados],["EN REVISION",10],["Virtualizaci\xc3\xb3n \xc2\xb7 subidos",r.headerTotals?.virtualizadosReportados??o.virtConf],["Virtualizaci\xc3\xb3n \xc2\xb7 sin informaci\xc3\xb3n",o.virtSinInfo]',
+            b'["REVISION EXPERTO",o.completas],["REVISIONES CON COMENTARIO",r.headerTotals?.cambiosReportados??o.cambios],["Sin revisi\xc3\xb3n registrada",o.sinRevision,"Celda vac\xc3\xada."],["APROBADO/COMPLETO",r.headerTotals?.aprobadosReportados??o.aprobados],["EN REVISION",10],["VIRTUALIZACI\xc3\x93N \xc2\xb7 subidos",r.headerTotals?.virtualizadosReportados??o.virtConf,"Cantidad de PADs subidos para virtualizaci\xc3\xb3n."],["VIRTUALIZACI\xc3\x93N \xc2\xb7 sin informaci\xc3\xb3n",o.virtSinInfo,"PAD sin informaci\xc3\xb3n registrada."]',
+        ),
+        (
+            b'].map(([c,u])=>b.jsxs("td",{children:[b.jsx("b",{children:u}),b.jsx("span",{children:c})]},String(c)))',
+            b'].map(([c,u,d])=>b.jsxs("td",{children:[b.jsx("b",{children:u}),b.jsx("span",{children:c}),d&&b.jsx("small",{style:{display:"block",fontSize:"7pt",color:"#7A8A81"},children:d})]},String(c)))',
+        ),
+        (
+            b',["Virtualizaci\xc3\xb3n en proceso",2]',
+            b'',
+        ),
+        (
+            b'b.jsx("h2",{children:"PADs en proceso de virtualizaci\\xf3n"}),b.jsxs("ul",{children:[b.jsx("li",{children:"Agroecoturismo"}),b.jsx("li",{children:"Redes Sociales en Marketing Digital"})]})',
+            b'',
         ),
         (
             b'children:p.aprobados}),b.jsx("span",{children:"Aprobaci\xc3\xb3n expl\xc3\xadcita"}),b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})]})',
-            b'children:a.headerTotals?.aprobadosReportados??p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"}),b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.virtualizadosReportados??p.virtConf}),b.jsx("span",{children:"VIRTUALIZACI\xc3\x93N \xc2\xb7 subidos"}),b.jsx("small",{children:"Cantidad de PADs subidos para virtualizaci\xc3\xb3n."})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.virtSinInfo}),b.jsx("span",{children:"VIRTUALIZACI\xc3\x93N \xc2\xb7 sin informaci\xc3\xb3n"}),b.jsx("small",{children:"PAD sin informaci\xc3\xb3n registrada."})]})',
+            b'children:a.headerTotals?.aprobadosReportados??p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"}),b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})]}),b.jsxs("div",{children:[b.jsx("b",{children:2}),b.jsx("span",{children:"Virtualizaci\xc3\xb3n"}),b.jsxs("small",{children:["en proceso de virtualizaci\xc3\xb3n.",b.jsx("br",{}),"Agroecoturismo"," \xc2\xb7 ","Redes Sociales en Marketing Digital"]})]})',
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsxs("span",{children:["Revisi\xc3\xb3n completa \xc2\xb7 ",br(p.completas,p.n)," de ",p.n]})',
@@ -311,6 +323,30 @@ def dashboard_html() -> bytes:
                 f"que debía actualizarse: {old.decode('utf-8', errors='replace')}"
             )
         html = html.replace(old, new, 1)
+
+    removals = (
+        (
+            rb',h===4&&b\.jsxs\("div",\{className:"p-obs",children:\[.*?\}\),h===5&&',
+            b',h===4&&',
+            "la diapositiva de observaciones",
+        ),
+        (
+            rb',\"Observaciones que requieren seguimiento\"',
+            b"",
+            "el título de la diapositiva de observaciones",
+        ),
+        (
+            rb'b\.jsx\("h2",\{children:"Observaciones que requieren seguimiento"\}\),s\.length\?b\.jsxs\("table",\{children:\[.*?\}\):b\.jsx\("p",\{children:"Sin registros\."\}\),(?=b\.jsx\("h2",\{children:"Detalle por facultad y programa"\}\))',
+            b"",
+            "la sección de observaciones del informe imprimible",
+        ),
+    )
+    for pattern, replacement, description in removals:
+        html, matches = re.subn(pattern, replacement, html, count=1, flags=re.DOTALL)
+        if matches != 1:
+            raise RuntimeError(
+                f"No se encontró exactamente una referencia para quitar {description}."
+            )
 
     if SUPABASE_ENABLED:
         workbook = supabase_workbook()
