@@ -192,10 +192,6 @@ def dashboard_html() -> bytes:
             b'h.padsReportados=iv(a,`B${m}`),h.revisadosReportados=iv(a,`E${m}`),h.virtualizadosReportados=o.virtualColumn?iv(a,`${o.virtualColumn}${m}`):null,h.aprobadosReportados=iv(a,`G${m}`),h.cambiosReportados=iv(a,`F${m}`);continue',
         ),
         (
-            b'children:B.virtConf}),b.jsx("span",{className:"k-def",children:"confirmadas"})',
-            b'children:ce.virtualizadosReportados??B.virtConf}),b.jsx("span",{className:"k-def",children:"subidos"})',
-        ),
-        (
             b'label:"REVISIONES CON COMENTARIO",value:B.cambios,',
             b'label:"REVISIONES CON COMENTARIO",value:e.headerTotals?.cambiosReportados??B.cambios,',
         ),
@@ -280,10 +276,6 @@ def dashboard_html() -> bytes:
             b'b.jsxs("span",{className:"k-def",children:[br(ne.value,B.n),b.jsx("small",{style:{marginLeft:"4px"},children:"PAD asignados a este ingeniero"})]})',
         ),
         (
-            b'b.jsxs("span",{className:"k-def",children:["Denominador: ",B.n," PAD. Celda vac\xc3\xada = sin informaci\xc3\xb3n, no \xe2\x80\x9cpendiente\xe2\x80\x9d."]})',
-            b'b.jsx("span",{className:"k-def",children:"Estado de virtualizaci\xc3\xb3n en el archivo"})',
-        ),
-        (
             b'def:G?`de ${_.length} en el archivo`:`${B.programas} programas \xc2\xb7 ${B.facultades} facultades`',
             b'def:"Cantidad total de PADs registrados"',
         ),
@@ -310,10 +302,6 @@ def dashboard_html() -> bytes:
         (
             b'PAD asignados a este ingeniero',
             b'Cantidad de PADs asignados a este ingeniero',
-        ),
-        (
-            b'Estado de virtualizaci\xc3\xb3n en el archivo',
-            b'Cantidad de PADs seg\xc3\xban su estado de virtualizaci\xc3\xb3n',
         ),
     )
     for old, new in replacements:
