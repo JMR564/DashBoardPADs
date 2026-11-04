@@ -11,7 +11,7 @@ La columna G puede llamarse **Aprobado en segunda instancia**; sus valores
 alimentan la columna de aprobación de los detalles. La tarjeta
 **APROBADO/COMPLETO** muestra el total de `G2`; si está vacío, cuenta los PAD
 con valor afirmativo (`Sí`, `Si` o `Aprobado`) en G. La tarjeta
-**EN REVISION** conserva su valor fijo de 20.
+**EN REVISION** conserva su valor fijo de 10.
 La virtualización se toma de la columna cuyo encabezado `Virtualizacion` esté
 en I1 (preferida), H1 o, en archivos anteriores, G1. La tarjeta
 **VIRTUALIZACIÓN** muestra el total informado en la fila 2 de esa columna

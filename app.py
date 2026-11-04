@@ -149,7 +149,23 @@ def dashboard_html() -> bytes:
         ),
         (
             b'Aprobaci\xc3\xb3n expl\xc3\xadcita (\xe2\x80\x9cAprobado\xe2\x80\x9d) en ${a.aprobados} PAD. ${a.observaciones} PAD tienen observaciones distintas de \xe2\x80\x9cAprobado\xe2\x80\x9d; el archivo no registra si ya fueron atendidas.',
-            b'Aprobaci\xc3\xb3n en segunda instancia (\xe2\x80\x9cAprobado\xe2\x80\x9d) en ${a.aprobados} PAD. ${a.observaciones} PAD tienen otro valor registrado en esa columna.',
+            b'APROBADO/COMPLETO: ${h?.aprobadosReportados??a.aprobados} PAD. EN REVISION: 10 PAD.',
+        ),
+        (
+            b'function WB(e,t,r,n){const a=Di(e,t);',
+            b'function WB(e,t,r,n,h){const a=Di(e,t);',
+        ),
+        (
+            b'Revisi\xc3\xb3n por experto: ${a.completas} completa${a.completas===1?"":"s"} (${br(a.completas,a.n)} de ${a.n}), ${a.parciales} parcial${a.parciales===1?"":"es"} y ${a.sinRevision} sin revisi\xc3\xb3n registrada.',
+            b'REVISION EXPERTO: ${a.completas} PAD (${br(a.completas,a.n)} de ${a.n}). REVISIONES CON COMENTARIO: ${h?.cambiosReportados??a.cambios} PAD.',
+        ),
+        (
+            b'i.push(a.virtConf?`Virtualizaci\xc3\xb3n confirmada en ${a.virtConf} PAD; ${a.virtSinInfo} sin informaci\xc3\xb3n registrada.`:`No hay virtualizaciones confirmadas en el archivo; ${a.virtSinInfo} de ${a.n} PAD no tienen informaci\xc3\xb3n de virtualizaci\xc3\xb3n registrada.`);',
+            b'i.push(`Virtualizaci\xc3\xb3n: ${h?.virtualizadosReportados??a.virtConf} subidos; ${a.virtSinInfo} sin informaci\xc3\xb3n registrada.`);',
+        ),
+        (
+            b'WB(T,D,a.goal,G)',
+            b'WB(T,D,a.goal,G,e.headerTotals)',
         ),
         (
             b'label:"APROBADO/COMPLETO",value:B.aprobados,tone:"ok",def:`${br(B.aprobados,B.n)} de ${B.n} \xc2\xb7 observaci\xc3\xb3n \xe2\x80\x9cAprobado\xe2\x80\x9d`',
@@ -229,7 +245,15 @@ def dashboard_html() -> bytes:
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"revisiones completas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"revisi\xc3\xb3n parcial"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"aprobaciones expl\xc3\xadcitas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.observaciones}),b.jsx("span",{children:"con observaciones"})]})',
-            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISION EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:20}),b.jsx("span",{children:"EN REVISION"})]})',
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISION EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.cambiosReportados??p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.aprobadosReportados??p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:10}),b.jsx("span",{children:"EN REVISION"})]})',
+        ),
+        (
+            b'["Revisiones completas",o.completas],["Parciales",o.parciales],["Sin revisi\xc3\xb3n",o.sinRevision],["Aprobados",o.aprobados],["Con observaciones",o.observaciones],["Virtualizaci\xc3\xb3n confirmada",o.virtConf]',
+            b'["REVISION EXPERTO",o.completas],["REVISIONES CON COMENTARIO",r.headerTotals?.cambiosReportados??o.cambios],["Sin revisi\xc3\xb3n registrada",o.sinRevision],["APROBADO/COMPLETO",r.headerTotals?.aprobadosReportados??o.aprobados],["EN REVISION",10],["Virtualizaci\xc3\xb3n \xc2\xb7 subidos",r.headerTotals?.virtualizadosReportados??o.virtConf],["Virtualizaci\xc3\xb3n \xc2\xb7 sin informaci\xc3\xb3n",o.virtSinInfo]',
+        ),
+        (
+            b'children:p.aprobados}),b.jsx("span",{children:"Aprobaci\xc3\xb3n expl\xc3\xadcita"}),b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})]})',
+            b'children:a.headerTotals?.aprobadosReportados??p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"}),b.jsx("small",{children:"Cantidad de PADs aprobados en segunda instancia."})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.virtualizadosReportados??p.virtConf}),b.jsx("span",{children:"VIRTUALIZACI\xc3\x93N \xc2\xb7 subidos"}),b.jsx("small",{children:"Cantidad de PADs subidos para virtualizaci\xc3\xb3n."})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.virtSinInfo}),b.jsx("span",{children:"VIRTUALIZACI\xc3\x93N \xc2\xb7 sin informaci\xc3\xb3n"}),b.jsx("small",{children:"PAD sin informaci\xc3\xb3n registrada."})]})',
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsxs("span",{children:["Revisi\xc3\xb3n completa \xc2\xb7 ",br(p.completas,p.n)," de ",p.n]})',
