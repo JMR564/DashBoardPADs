@@ -140,6 +140,18 @@ def dashboard_html() -> bytes:
             b'virtRaw:v',
         ),
         (
+            b'return{iso:null,raw:lh(e.v),problem:"fecha escrita como texto (no se interpreta)"}}const Vr=',
+            b'const t=lh(e.v),r=t.match(/^(\\d{1,2})[\\/-](\\d{1,2})[\\/-](\\d{4})$/);if(!r)return{iso:null,raw:t,problem:"fecha escrita como texto con formato no reconocido"};const n=Number(r[1]),a=Number(r[2]),i=Number(r[3]),o=new Date(Date.UTC(i,a-1,n));return o.getUTCFullYear()===i&&o.getUTCMonth()===a-1&&o.getUTCDate()===n?{iso:`${i}-${Zf(a)}-${Zf(n)}`,raw:t,text:!0}:{iso:null,raw:t,problem:"fecha escrita como texto inv\xc3\xa1lida"}}const Vr=',
+        ),
+        (
+            b'fechaISO:_.iso,fechaRaw:_.raw,revision:D',
+            b'fechaISO:_.iso,fechaRaw:_.raw,fechaTexto:_.text===!0,revision:D',
+        ),
+        (
+            b'return{...r,fechaAlmacenada:n,fechaISO:Number(o)<=12?`${a}-${o}-${i}`:n}})}function BB',
+            b'return{...r,fechaAlmacenada:n,fechaISO:r.fechaTexto?n:Number(o)<=12?`${a}-${o}-${i}`:n}})}function BB',
+        ),
+        (
             b'udec-pad:v1:data',
             b'udec-pad:v2:data',
         ),
@@ -237,7 +249,15 @@ def dashboard_html() -> bytes:
         ),
         (
             b'Segmentos por estado de revisi\xc3\xb3n \xc2\xb7 clic para filtrar',
-            b'Conteos por indicador \xc2\xb7 pueden coincidir \xc2\xb7 clic para filtrar',
+            b'Cantidad de PADs realizados por ingeniero \xc2\xb7 clic para filtrar',
+        ),
+        (
+            b'b.jsx("div",{className:"legend",children:["completa","parcial","sin_registro"].map(ne=>b.jsxs("span",{children:[b.jsx("i",{style:{background:yp[ne]}}),va[ne]]},ne))})',
+            b'b.jsx("div",{className:"legend",children:b.jsxs("span",{children:[b.jsx("i",{style:{background:je.green}}),"PAD realizados"]})})',
+        ),
+        (
+            b'b.jsx("div",{className:"legend big",children:["completa","parcial","sin_registro"].map(x=>b.jsxs("span",{children:[b.jsx("i",{style:{background:yp[x]}}),va[x]]},x))})',
+            b'b.jsx("div",{className:"legend big",children:b.jsxs("span",{children:[b.jsx("i",{style:{background:je.green}}),"PAD realizados"]})})',
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"revisiones completas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"revisi\xc3\xb3n parcial"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"aprobaciones expl\xc3\xadcitas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.observaciones}),b.jsx("span",{children:"con observaciones"})]})',
@@ -270,14 +290,6 @@ def dashboard_html() -> bytes:
         (
             b'b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"Revisi\xc3\xb3n parcial"}),b.jsx("small",{children:"Valor \xe2\x80\x9cA medias\xe2\x80\x9d."})',
             b'b.jsx("b",{children:p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"}),b.jsx("small",{children:"Cantidad de PADs con comentarios."})',
-        ),
-        (
-            b'va[ne]]},ne))',
-            b'revisionChartLabels[ne]??va[ne]]},ne))',
-        ),
-        (
-            b'va[x]]},x))',
-            b'revisionChartLabels[x]??va[x]]},x))',
         ),
         (
             b'b.jsx("span",{className:"k-def",children:r})',
@@ -323,6 +335,38 @@ def dashboard_html() -> bytes:
                 f"que debía actualizarse: {old.decode('utf-8', errors='replace')}"
             )
         html = html.replace(old, new, 1)
+
+    engineer_chart = (
+        b'function M4({rs:e,engineers:t,f:r,setF:n,big:a}){'
+        b'const o=[...t,...e.some(l=>l.ambos)?["Ambos (verificar)"]:[]]'
+        b'.map(l=>({name:l,total:e.filter(c=>c.ingeniero===l).length})),'
+        b's=a?260:170;return b.jsx(vf,{width:"100%",height:s,children:'
+        b'b.jsxs(zy,{data:o,layout:"vertical",'
+        b'margin:{left:8,right:40,top:4,bottom:4},barCategoryGap:a?28:18,'
+        b'onClick:l=>(l==null?void 0:l.activeLabel)&&'
+        b'n({ingeniero:r.ingeniero===l.activeLabel?"":l.activeLabel}),children:['
+        b'b.jsx(Sf,{horizontal:!1,stroke:je.grid}),'
+        b'b.jsx(Ki,{type:"number",allowDecimals:!1,tick:dl,axisLine:!1,tickLine:!1}),'
+        b'b.jsx(Xi,{type:"category",dataKey:"name",width:a?150:104,'
+        b'tick:{...dl,fontSize:a?16:13,fill:je.ink,fontWeight:600},'
+        b'axisLine:!1,tickLine:!1}),'
+        b'b.jsx(Ir,{...xp,formatter:(l)=>[l,"PAD realizados"]}),'
+        b'b.jsx(qn,{dataKey:"total",name:"PAD realizados",fill:je.green,'
+        b'cursor:"pointer",radius:[0,6,6,0],children:o.map(f=>'
+        b'b.jsx(Hi,{opacity:r.ingeniero&&r.ingeniero!==f.name?.3:1},f.name))})'
+        b']})})}'
+    )
+    html, chart_matches = re.subn(
+        rb'function M4\(\{rs:e,engineers:t,f:r,setF:n,big:a\}\)\{.*?\}(?=function L4\()',
+        engineer_chart,
+        html,
+        count=1,
+        flags=re.DOTALL,
+    )
+    if chart_matches != 1:
+        raise RuntimeError(
+            "No se encontró exactamente una gráfica de producción por ingeniero."
+        )
 
     removals = (
         (
