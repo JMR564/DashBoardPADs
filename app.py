@@ -152,6 +152,14 @@ def dashboard_html() -> bytes:
             b'return{...r,fechaAlmacenada:n,fechaISO:r.fechaTexto?n:Number(o)<=12?`${a}-${o}-${i}`:n}})}function BB',
         ),
         (
+            b'd+=f.get(y)??0,s(y)?h.push({fecha:y,dia:f.get(y)??0,acumulado:d}):(v+=f.get(y)??0,h.length&&(h[h.length-1].acumulado=d))',
+            b'd+=f.get(y)??0,s(y)?h.push({fecha:y,dia:f.get(y)??0,acumulado:d}):(v+=f.get(y)??0,f.has(y)&&h.push({fecha:y,dia:f.get(y)??0,acumulado:d}))',
+        ),
+        (
+            b'Barras: PAD por fecha de carga \xc2\xb7 l\xc3\xadnea: acumulado desde el inicio \xc2\xb7 solo d\xc3\xadas h\xc3\xa1biles de lunes a viernes; no se descuentan festivos.',
+            b'Barras: PAD por fecha de carga \xc2\xb7 l\xc3\xadnea: acumulado desde el inicio \xc2\xb7 incluye fines de semana con cargas; el ritmo se mide en d\xc3\xadas h\xc3\xa1biles sin descontar festivos.',
+        ),
+        (
             b'udec-pad:v1:data',
             b'udec-pad:v2:data',
         ),
