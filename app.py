@@ -169,7 +169,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'Aprobaci\xc3\xb3n expl\xc3\xadcita (\xe2\x80\x9cAprobado\xe2\x80\x9d) en ${a.aprobados} PAD. ${a.observaciones} PAD tienen observaciones distintas de \xe2\x80\x9cAprobado\xe2\x80\x9d; el archivo no registra si ya fueron atendidas.',
-            b'APROBADO/COMPLETO: ${h?.aprobadosReportados??a.aprobados} PAD. EN REVISION: 10 PAD.',
+            b'APROBADO/COMPLETO: ${h?.aprobadosReportados??a.aprobados} PAD. EN REVISION: 8 PAD.',
         ),
         (
             b'function WB(e,t,r,n){const a=Di(e,t);',
@@ -269,11 +269,11 @@ def dashboard_html() -> bytes:
         ),
         (
             b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"revisiones completas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.parciales}),b.jsx("span",{children:"revisi\xc3\xb3n parcial"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.aprobados}),b.jsx("span",{children:"aprobaciones expl\xc3\xadcitas"})]}),b.jsxs("div",{children:[b.jsx("b",{children:p.observaciones}),b.jsx("span",{children:"con observaciones"})]})',
-            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISION EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.cambiosReportados??p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.aprobadosReportados??p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:10}),b.jsx("span",{children:"EN REVISION"})]})',
+            b'b.jsx("b",{children:p.completas}),b.jsx("span",{children:"REVISION EXPERTO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.cambiosReportados??p.cambios}),b.jsx("span",{children:"REVISIONES CON COMENTARIO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:a.headerTotals?.aprobadosReportados??p.aprobados}),b.jsx("span",{children:"APROBADO/COMPLETO"})]}),b.jsxs("div",{children:[b.jsx("b",{children:8}),b.jsx("span",{children:"EN REVISION"})]})',
         ),
         (
             b'["Revisiones completas",o.completas],["Parciales",o.parciales],["Sin revisi\xc3\xb3n",o.sinRevision],["Aprobados",o.aprobados],["Con observaciones",o.observaciones],["Virtualizaci\xc3\xb3n confirmada",o.virtConf]',
-            b'["REVISION EXPERTO",o.completas],["REVISIONES CON COMENTARIO",r.headerTotals?.cambiosReportados??o.cambios],["Sin revisi\xc3\xb3n registrada",o.sinRevision,"Celda vac\xc3\xada."],["APROBADO/COMPLETO",r.headerTotals?.aprobadosReportados??o.aprobados],["EN REVISION",10],["VIRTUALIZACI\xc3\x93N \xc2\xb7 subidos",r.headerTotals?.virtualizadosReportados??o.virtConf,"Cantidad de PADs subidos para virtualizaci\xc3\xb3n."],["VIRTUALIZACI\xc3\x93N \xc2\xb7 sin informaci\xc3\xb3n",o.virtSinInfo,"PAD sin informaci\xc3\xb3n registrada."]',
+            b'["REVISION EXPERTO",o.completas],["REVISIONES CON COMENTARIO",r.headerTotals?.cambiosReportados??o.cambios],["Sin revisi\xc3\xb3n registrada",o.sinRevision,"Celda vac\xc3\xada."],["APROBADO/COMPLETO",r.headerTotals?.aprobadosReportados??o.aprobados],["EN REVISION",8],["VIRTUALIZACI\xc3\x93N \xc2\xb7 subidos",r.headerTotals?.virtualizadosReportados??o.virtConf,"Cantidad de PADs subidos para virtualizaci\xc3\xb3n."],["VIRTUALIZACI\xc3\x93N \xc2\xb7 sin informaci\xc3\xb3n",o.virtSinInfo,"PAD sin informaci\xc3\xb3n registrada."]',
         ),
         (
             b'].map(([c,u])=>b.jsxs("td",{children:[b.jsx("b",{children:u}),b.jsx("span",{children:c})]},String(c)))',
@@ -325,7 +325,7 @@ def dashboard_html() -> bytes:
         ),
         (
             b'value:20,tone:"alert",def:',
-            b'value:10,tone:"alert",def:',
+            b'value:8,tone:"alert",def:',
         ),
         (
             b'texto distinto de \xe2\x80\x9cAprobado\xe2\x80\x9d',
